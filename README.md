@@ -37,7 +37,7 @@ For audio transcription of long recordings, raise `upload_max_filesize` and `pos
 
 ## 2. Run the app
 
-Requires Flutter 3.27 or newer.
+Requires Flutter 3.50 or newer (run `flutter upgrade` first).
 
 ```bash
 cd app

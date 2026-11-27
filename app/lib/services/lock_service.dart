@@ -37,7 +37,7 @@ class LockService extends ChangeNotifier {
     try {
       final ok = await _auth.authenticate(
         localizedReason: 'Unlock PowerNotes',
-        options: const AuthenticationOptions(stickyAuth: true),
+        persistAcrossBackgrounding: true,
       );
       if (ok) _unlock();
       return ok;

@@ -22,7 +22,7 @@ class ReminderService {
       final offset = DateTime.now().timeZoneOffset;
       // Pick a fixed-offset zone matching the device (Philippines = +8, no DST).
       final match = tz.timeZoneDatabase.locations.values.firstWhere(
-          (l) => l.currentTimeZone.offset == offset.inMilliseconds,
+          (l) => l.currentTimeZone.offset == offset,
           orElse: () => tz.UTC);
       tz.setLocalLocation(match);
       const settings = InitializationSettings(
@@ -34,7 +34,7 @@ class ReminderService {
           guid: '6d1f2b0e-8f8a-4d57-9a43-2b6f1d1f9c21',
         ),
       );
-      await _plugin.initialize(settings);
+      await _plugin.initialize(settings: settings);
       if (Platform.isAndroid) {
         final android = _plugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();
@@ -81,7 +81,7 @@ class ReminderService {
   Future<void> scheduleFor(Note n) async {
     if (!_ready || Platform.isLinux) return;
     for (var i = 0; i < 16; i++) {
-      await _plugin.cancel(_id(n.uuid, i));
+      await _plugin.cancel(id: _id(n.uuid, i));
     }
     if (n.deleted) return;
     final list = parse(n).where((r) => r.dueAt.isAfter(DateTime.now())).take(16).toList();
@@ -89,11 +89,11 @@ class ReminderService {
       final r = list[i];
       try {
         await _plugin.zonedSchedule(
-          _id(n.uuid, i),
-          r.noteTitle,
-          r.text.isEmpty ? 'Reminder' : r.text,
-          tz.TZDateTime.from(r.dueAt, tz.local),
-          const NotificationDetails(
+          id: _id(n.uuid, i),
+          title: r.noteTitle,
+          body: r.text.isEmpty ? 'Reminder' : r.text,
+          scheduledDate: tz.TZDateTime.from(r.dueAt, tz.local),
+          notificationDetails: const NotificationDetails(
             android: AndroidNotificationDetails('reminders', 'Reminders',
                 importance: Importance.high, priority: Priority.high),
             windows: WindowsNotificationDetails(),
