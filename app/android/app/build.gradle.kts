@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "com.eirencaleb.powernotes"
-    compileSdk = flutter.compileSdkVersion
+    // androidx.core 1.19 (pulled in by plugins) needs API 37 to compile against.
+    compileSdk = maxOf(flutter.compileSdkVersion, 37)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
