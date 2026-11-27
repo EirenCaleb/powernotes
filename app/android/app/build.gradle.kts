@@ -27,6 +27,13 @@ android {
         multiDexEnabled = true
     }
 
+    lint {
+        // Android lint crashes on some plugin sources with JDK 17
+        // (List.removeLast). Lint is not needed to produce the APK.
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
+
     buildTypes {
         release {
             // Signed with debug keys for now so `flutter run --release` works.
