@@ -32,6 +32,10 @@ android {
             // Signed with debug keys for now so `flutter run --release` works.
             // Before publishing on Play Store, add your own keystore.
             signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 }
