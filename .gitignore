@@ -1,0 +1,7 @@
+# Never commit server secrets
+powernotes_config.php
+powernotes_config.local.php
+.env
+*.keystore
+*.jks
+key.properties
