@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:window_manager/legacy.dart';
+import 'package:window_manager/window_manager.dart';
 
 /// Laptop extras: a global Ctrl+Alt+N hotkey that brings PowerNotes to the
 /// front with a fresh quick note, even when another app has focus.

@@ -5,11 +5,14 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   file_selector_windows
+  hotkey_manager_windows
   local_auth_windows
   printing
+  screen_retriever_windows
   speech_to_text_windows
   url_launcher_windows
   share_plus
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
